@@ -34,7 +34,6 @@ from mdsuite.database.simulation_database import Database
 from mdsuite.calculators.transformations_reference import \
     switcher_transformations
 from mdsuite.database.property_database import PropertiesDatabase
-from mdsuite.database.analysis_database import AnalysisDatabase
 from tqdm import tqdm
 from typing import Union, List, Any
 
@@ -503,25 +502,6 @@ class Calculator(metaclass=abc.ABCMeta):
                 A correctly formatted name for the SQL database.
         """
         return f"{self.database_group}_{self.analysis_name}_{self.data_range}_{species}"
-
-    def _save_data(self, name: str, data: pd.DataFrame):
-        """
-        Save tensor_values to the save tensor_values directory
-
-        Parameters
-        ----------
-        name : str
-                name of the tensor_values to save. Usually this is just the
-                analysis name. In the case of species specific analysis,
-                this will be further appended to include the name of the
-                species.
-        data : pd.DataFrame
-                Data to be saved.
-        """
-        database = AnalysisDatabase(
-            name=os.path.join(self.experiment.database_path,
-                              "analysis_database"))
-        database.add_data(name=name, data_frame=data)
 
     def _plot_fig(self,
                   fig: matplotlib.figure.Figure,
