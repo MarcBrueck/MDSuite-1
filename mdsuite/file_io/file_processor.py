@@ -111,7 +111,6 @@ class FileProcessor(metaclass=abc.ABCMeta):
         for _ in range(n_frames):
             self.trajectory.read()
 
-
     def process_data(self):
         """
         Process the data and add it to the hdf5 database.
@@ -131,4 +130,4 @@ if __name__ == '__main__':
     """
     obj = Trajectory('/tikhome/stovey/work/Interatomic_Potentials_Investigation/Molten_Salts/Chlorides/NaCl/Classical_Potential/old/NaCl_Data.lammpstrj')
     data = obj.read()
-    print(data.atoms[0]['x'])
+    print(data.atoms[0]['fx'])
